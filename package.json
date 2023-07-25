@@ -19,7 +19,6 @@
     "build": "tsup",
     "build:check": "tsc --noEmit",
     "update": "ncu -u && yarn up '**' -R",
-    "postinstall": "husky install",
     "prepack": "yarn build && pinst -d",
     "postpack": "pinst -e"
   },
