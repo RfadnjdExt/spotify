@@ -37,7 +37,7 @@ type Album = DataList & { type: "album" };
 type Playlist = DataList & { type: "playlist" };
 type Artist = DataList & { type: "artist" };
 type TrackList = Album | Playlist | Artist;
-type Data = Track | TrackList;
+export type Data = Track | TrackList;
 
 let firstWarning1 = true;
 let firstWarning2 = true;
@@ -68,7 +68,7 @@ export class API {
     }
   }
 
-  isSupportedTypes(type: string): type is typeof SUPPORTED_TYPES[number] {
+  isSupportedTypes(type: string): type is (typeof SUPPORTED_TYPES)[number] {
     return SUPPORTED_TYPES.includes(<any>type);
   }
 
@@ -171,7 +171,7 @@ export class API {
           name = body.name;
           thumbnail = body.images?.[0]?.url;
           url = body.external_urls?.spotify;
-          tracks = (await this.#getFullItems(body)).map(i => i.track);
+          tracks = (await this.#getFullItems(body)).map(i => i.track!);
           break;
         }
         case "artist": {
